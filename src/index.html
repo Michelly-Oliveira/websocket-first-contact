@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSocket Connection</title>
+  </head>
+  <body>
+    <h1>Hello There</h1>
+
+    <p>We are testing a WebSocket connection to a local server</p>
+
+    <script>
+      // Server url
+      const url = "ws://localhost:8080";
+
+      // Create an instance of WebSocket to connect to the url
+      const connection = new WebSocket(url);
+
+      // When the connection is established - connection.onopen()
+      connection.onopen = () => {
+        // connection.send - used to send data on a seocket connection
+        connection.send(
+          "Hello There! This is a message from the client to the server"
+        );
+
+        console.log("Client: WebScoket connection established");
+      };
+
+      // In case there is an error on the connection
+      connection.onerror = (error) => {
+        console.log(`WebSocket error: ${error}`);
+      };
+
+      // connection.onmessage - used to handle received data
+      connection.onmessage = (event) => {
+        console.log(event.data);
+      };
+    </script>
+  </body>
+</html>
